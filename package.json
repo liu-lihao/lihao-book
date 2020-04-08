@@ -1,14 +1,14 @@
 {
-  "name": "05-vuepress",
+  "name": "lihao-book",
   "version": "1.0.0",
-  "description": "## 开发文档",
-  "main": "index.js",
+  "description": "笔记",
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "bash deploy.sh"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "liu-lihao",
   "devDependencies": {
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2"
   }
 }
