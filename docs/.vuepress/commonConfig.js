@@ -7,7 +7,7 @@ const getFirstFilename = (str) => {
 }
 
 module.exports = {
-  title: '利豪的笔记', // TODO 改个标题~
+  title: '笔记', // TODO 改个标题~
   description: '在这里记下我的所有笔记，方便查阅', // TODO 给个描述~
   port: 8888,
   head: [
@@ -49,12 +49,12 @@ module.exports = {
       { text: '首页', link: '/' },
       {
         text: '笔记集合', items: [
-          { text: '阮一峰 ES6', link: `/阮一峰ES6/${getFirstFilename('阮一峰ES6')}` },
           { text: 'JavaScript', link: `/JavaScript/${getFirstFilename('JavaScript')}` },
+          { text: '阮一峰 ES6', link: `/阮一峰ES6/${getFirstFilename('阮一峰ES6')}` },
           { text: 'Vue', link: `/Vue/${getFirstFilename('Vue')}` },
+          { text: 'React', link: `/React/${getFirstFilename('React')}` },
           { text: 'Nodejs', link: `/Nodejs/${getFirstFilename('Nodejs')}` },
           { text: 'Koa', link: `/Koa/${getFirstFilename('Koa')}` },
-          { text: 'React', link: `/React/${getFirstFilename('React')}` },
           { text: 'Webpack', link: `/Webpack/${getFirstFilename('Webpack')}` },
           { text: 'TypeScript', link: `/TypeScript/${getFirstFilename('TypeScript')}` },
         ]
