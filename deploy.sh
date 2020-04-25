@@ -1,4 +1,27 @@
 echo '开始执行部署 GitHub 命令'
+
+# 提交源码
+git add .
+read -p "请输入 commit 内容: " content #提示用户输入数字
+
+# if [ ! $content ] 
+# then             #判断用户是否输入，如果未输入则打印error
+  git commit -m "常规更新"
+# else
+#   git commit -m "$content"
+# fi
+
+read -p "enter a number: " content  #提示用户输入数字
+if [ ! $content ];then             #判断用户是否输入，如果未输入则打印error
+  echo "Error"
+else
+  echo "$content 刚刚的输入"
+fi
+
+git push origin master
+git pull origin master
+
+
 # 生成静态文件
 echo '执行命令：vuepress build docs'
 vuepress build docs
