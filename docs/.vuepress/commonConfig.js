@@ -40,7 +40,7 @@ module.exports = {
     //  docsDir: 'docs',
     // 假如文档放在一个特定的分支下：
     // docsBranch: 'master',
-
+    sidebarDepth: 2,
     smoothScroll: true, // 启用页面滚动效果
     displayAllHeaders: false, // 默认为false ， 侧边栏是否仅显示当前激活的子选项。
     logo: '/images/logo.png', // TODO 这个路径可以不用改，直接去换张图片吧
