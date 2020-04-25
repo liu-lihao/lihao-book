@@ -2,20 +2,15 @@ echo '开始执行部署 GitHub 命令'
 
 # 提交源码
 git add .
-read -p "请输入 commit 内容: " content #提示用户输入数字
-
-# if [ ! $content ] 
-# then             #判断用户是否输入，如果未输入则打印error
-  git commit -m "常规更新"
-# else
-#   git commit -m "$content"
-# fi
 
 read -p "enter a number: " content  #提示用户输入数字
 if [ ! $content ];then             #判断用户是否输入，如果未输入则打印error
-  echo "Error"
+  echo "默认： 常规更新"
+  git commit -m "常规更新"
+
 else
-  echo "$content 刚刚的输入"
+  echo "刚刚的输入： $content"
+  git commit -m "$content"
 fi
 
 git push origin master
