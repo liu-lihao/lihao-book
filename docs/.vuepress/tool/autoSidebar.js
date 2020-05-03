@@ -35,7 +35,10 @@ const autoSidebar = () => {
             // 只处理md
             const dirRelative = path.relative(curPath, dir);
             const dirArr = dirRelative.split(path.sep);
-            const sidebarValue = dirRelative.replace(new RegExp('\\' + mdInfo.ext + '$'), '').replace(new RegExp('\\' + path.sep, 'g'), '/');
+            const sidebarValue = dirRelative
+              .replace(new RegExp('\\' + mdInfo.ext + '$'), '')
+              .replace(new RegExp('\\' + path.sep, 'g'), '/')
+              .replace(/readme$/i, ''); // 对 readme 文件名提供支持
             if (mdInfo.ext !== '.md') {
               // 格式化 .md 后缀，vuepress 无法识别 .MD
               fs.rename(dir, path.join(dir, '../', mdInfo.name + '.md'))
@@ -50,12 +53,12 @@ const autoSidebar = () => {
               const title = tempDirArr.join(separator);
               const hasTitle = res[sidebarKey].some(item => {
                 if (typeof item === 'object' && item.title === title) {
-                  res[sidebarKey].children.push(sidebarValue);
+                    item.children.push(sidebarValue);
                   return true;
                 }
               })
               if (!hasTitle) {
-                // 判断当前这个title是否 不存在
+                // 判断当前这个title是否 不存在`
                 res[sidebarKey].push({
                   title,
                   children: [sidebarValue]
@@ -82,6 +85,12 @@ Object.keys(tempRes).forEach(resKey => {
       strArr.push(item)
     } else {
       item.children = item.children.sort(natsort());
+      const lastChild = item.children[item.children.length - 1];
+      // 将 readme 文件顺序置顶
+      if (lastChild[lastChild.length - 1] === '/' || (lastChild === '')) {
+        item.children.pop();
+        item.children.unshift(lastChild);
+      }
       objArr.push(item);
     }
   });
@@ -95,5 +104,7 @@ Object.keys(tempRes).forEach(resKey => {
     ...objArr
   ]
 })
+
+utils.log('autoSidebar',JSON.stringify(res));
 
 module.exports = res;

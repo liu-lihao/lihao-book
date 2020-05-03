@@ -32,12 +32,41 @@ const utils = {
     if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
       const files = (fs.readdirSync(dir) || [] ).map(filename => {
         const curPath = path.resolve(dir, filename);
-        const { name } = path.parse(curPath);
+        const { name, ext } = path.parse(curPath);
+        if (ext !== '.md') {
+          return null;
+        }
         return name
-      }).sort(natsort());
+      }).filter(item => item).sort(natsort());
       return files[index] || null
     }
     return null
+  },
+  dateFormat(dateObj = new Date(), fmt = 'yyyy-MM-dd') { // yyyy-MM-dd hh:mm:ss
+    const o = {
+      'M+': dateObj.getMonth() + 1, // 月份
+      'd+': dateObj.getDate(), // 日
+      'h+': dateObj.getHours(), // 小时
+      'm+': dateObj.getMinutes(), // 分
+      's+': dateObj.getSeconds(), // 秒
+      'q+': Math.floor((dateObj.getMonth() + 3) / 3), // 季度
+      S: dateObj.getMilliseconds() // 毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (`${dateObj.getFullYear()}`).substr(4 - RegExp.$1.length));
+    for (const k in o) if (new RegExp(`(${k})`).test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : ((`00${o[k]}`).substr((`${o[k]}`).length)));
+    return fmt;
+  },
+  log(title,text) {
+    const nowTime = this.dateFormat(new Date(), 'yyyy-MM-dd hh:mm:ss');
+    const logDir = './log.txt';
+    const line = '-------------------------------------------------------------'
+    let oldLog = '';
+    try {
+      oldLog = fs.readFileSync(logDir, 'utf8');
+    } catch(err) {
+      oldLog = '';
+    }
+    fs.writeFileSync(logDir, `${oldLog}[${nowTime}]#${title}#:${text}\n${line}\n`);
   }
 }
 

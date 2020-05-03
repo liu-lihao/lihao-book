@@ -1,9 +1,10 @@
 const path = require('path');
-const autoSidebar = require('./tool/autoSidebar.js')
+const autoSidebar = require('./tool/autoSidebar.js');
+const customSidebar = require('./tool/customSidebar.js');
 const utils = require('./tool/utils.js');
 
 const getFirstFilename = (str) => {
-  return utils.getDirChildFilenameByIndex(path.join(__dirname, `../${str}`), 0);
+  return `/${str}/` + utils.getDirChildFilenameByIndex(path.join(__dirname, `../${str}`), 0);
 }
 
 module.exports = {
@@ -49,20 +50,25 @@ module.exports = {
       { text: '首页', link: '/' },
       {
         text: '笔记集合', items: [
-          { text: 'JavaScript', link: `/JavaScript/${getFirstFilename('JavaScript')}` },
-          { text: '阮一峰 ES6', link: `/阮一峰ES6/${getFirstFilename('阮一峰ES6')}` },
-          { text: 'Vue', link: `/Vue/${getFirstFilename('Vue')}` },
-          { text: 'React', link: `/React/${getFirstFilename('React')}` },
-          { text: 'Nodejs', link: `/Nodejs/${getFirstFilename('Nodejs')}` },
-          { text: 'Koa', link: `/Koa/${getFirstFilename('Koa')}` },
-          { text: 'Webpack', link: `/Webpack/${getFirstFilename('Webpack')}` },
-          { text: 'TypeScript', link: `/TypeScript/${getFirstFilename('TypeScript')}` },
+          { text: 'JavaScript', link: getFirstFilename('JavaScript') },
+          { text: 'Vue', link: getFirstFilename('Vue') },
+          { text: 'React', link: getFirstFilename('React') },
+          { text: 'Nodejs', link: getFirstFilename('Nodejs') },
+          { text: 'Koa', link: getFirstFilename('Koa') },
+          { text: 'Webpack', link: getFirstFilename('Webpack') }
         ]
       },
-      { text: '合作伙伴', link: 'https://www.baidu.com' },
+      {
+        text: '收藏好书', items: [
+          { text: 'ES6 阮一峰', link: getFirstFilename('ES6-阮一峰') },
+          { text: 'TypeScript xcatliu', link: getFirstFilename('TypeScript-xcatliu') },
+        ]
+      },
+      { text: 'GitHub', link: 'https://github.com/liu-lihao' },
     ],
     sidebar: {
       ...autoSidebar,
+      ...customSidebar,
       '/': [], // TODO 根据你的喜好，可以来给首页添加侧边导航
     }
   },
