@@ -36,8 +36,14 @@ const utils = {
         if (ext !== '.md') {
           return null;
         }
+        if ( name.toLocaleLowerCase() === 'readme' ) {
+          return '';
+        }
         return name
-      }).filter(item => item).sort(natsort());
+      }).filter(item => item !== null).sort(natsort());
+      if (files.includes('')) {
+        return '';
+      }
       return files[index] || null
     }
     return null
