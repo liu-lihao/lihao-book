@@ -20,3 +20,23 @@ details.custom-block.details {
   color: #fff;
   background-color #d49400;
 }
+
+.content__default {
+  strong {
+    color: #d49433;
+  }
+}
+.medium-zoom-image {
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5);
+  }
+}
+.medium-zoom-image--opened {
+  z-index: 101;  
+}
+
+.medium-zoom-overlay {
+    background-color: rgba(0,0,0,0.6) !important;
+    z-index: 100;
+}

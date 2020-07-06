@@ -18,6 +18,7 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
+    ['script', { src: 'https://cdn.bootcdn.net/ajax/libs/medium-zoom/1.0.5/medium-zoom.min.js' }]
   ],
   base: '/lihao-book/', // TODO 如果你项目放在域名的根目录，请清空，否则请加上路径~
   // TODO 例如：https://liu-lihao.github.io/lihao-book/index.html
@@ -55,7 +56,8 @@ module.exports = {
           { text: 'React', link: getFirstFilename('React') },
           { text: 'Nodejs', link: getFirstFilename('Nodejs') },
           { text: 'Koa', link: getFirstFilename('Koa') },
-          { text: 'Webpack', link: getFirstFilename('Webpack') }
+          { text: 'Webpack', link: getFirstFilename('Webpack') },
+          { text: '前端', link: getFirstFilename('前端') }
         ]
       },
       {
@@ -78,7 +80,20 @@ module.exports = {
         '@img': path.join(__dirname, '../assets/images'), // TODO 使用~@img来引用这个目录下的图片。
       }
     }
-  }
+  },
+  // 插件
+  plugins: {
+    // '@vuepress/medium-zoom': {
+    //   selector: '.theme-default-content :not(a) > img',
+    //   // medium-zoom options here
+    //   // See: https://github.com/francoischalifour/medium-zoom#options
+    //   options: {
+    //     margin: 16
+    //   }
+    // }
+  },
+  // 为 false 表示：不转为 ES5，不考虑对 IE 的 polyfills
+  evergreen: false
 }
 
 

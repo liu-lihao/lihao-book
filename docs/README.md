@@ -4,7 +4,7 @@ heroImage: /images/home.png
 heroText: lihao-book
 tagline: 在这里记下我的笔记，方便查阅~
 actionText: 来看看吧~
-actionLink: /JavaScript/1.零散的js
+actionLink: /JavaScript/1.JS随笔
 features:
 - title: Vue
   details: 技巧、轮子~

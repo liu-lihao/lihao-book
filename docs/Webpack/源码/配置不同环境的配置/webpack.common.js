@@ -52,10 +52,12 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: 'src/index.html'
 		}), 
-		new CleanWebpackPlugin(['dist'])
+		new CleanWebpackPlugin(['dist'], {
+			root: path.resolve(__dirname, '../') // 调整该插件所认为的根目录
+		})
 	],
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, '../dist')
 	}
 }
