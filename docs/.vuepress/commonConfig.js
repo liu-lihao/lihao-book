@@ -57,13 +57,20 @@ module.exports = {
           { text: 'Nodejs', link: getFirstFilename('Nodejs') },
           { text: 'Koa', link: getFirstFilename('Koa') },
           { text: 'Webpack', link: getFirstFilename('Webpack') },
-          { text: '前端', link: getFirstFilename('前端') }
+          { text: '前端', link: getFirstFilename('前端') },
+          { text: '数据结构和算法', link: getFirstFilename('数据结构和算法') }
         ]
       },
       {
         text: '收藏好书', items: [
           { text: 'ES6 阮一峰', link: getFirstFilename('ES6-阮一峰') },
           { text: 'TypeScript xcatliu', link: getFirstFilename('TypeScript-xcatliu') },
+        ]
+      },
+      {
+        text: '站点', items: [
+          { text: 'GitHub', link: 'https://liu-lihao.github.io/lihao-book/' },
+          { text: 'Gitee', link: 'https://liu-lihao.gitee.io/lihao-book/' },
         ]
       },
       { text: 'GitHub', link: 'https://github.com/liu-lihao' },

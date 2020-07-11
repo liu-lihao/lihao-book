@@ -1,0 +1,91 @@
+# LoopQueue
+
+
+循环队列就是将队列存储空间的最后一个位置绕到第一个位置，形成逻辑上的环状空间，供队列循环使用。
+
+在循环队列结构中，当存储空间的最后一个位置已被使用而再要进入队运算时，只需要存储空间的第一个位置空闲，便可将元素加入到第一个位置，即将存储空间的第一个位置作为队尾。
+
+循环队列可以更简单防止伪溢出的发生，但队列大小是固定的。
+
+## 例子
+
+```js
+const queue = new LoopQueue(5); // [null, null, null, null, null]
+
+queue.push(1);
+queue.push(2);
+queue.push(3);
+// [1, 2, 3, null, null]
+
+queue.shift();
+queue.shift();
+// [null, null, 3, null, null]
+
+queue.push(4);
+queue.push(5);
+queue.push(6);
+// [6, null, 3, 4, 5]
+```
+
+
+## 实现
+
+实现循环队列的 **入队** ( `push` )和 **出队** ( `shift` )操作：
+
+```js
+function LoopQueue(n) {
+  this.max = n;
+  this.start = 0;
+  this.length = 0;
+  this.items = new Array(n).fill(null);
+}
+
+LoopQueue.prototype.nextIndex = function(current) {
+  const maxIndex = this.max - 1;
+  if (current === maxIndex) {
+    return 0;
+  }
+  return current + 1;
+}
+
+LoopQueue.prototype.endIndex = function() {
+  // 笨方法
+  // let endIndex = this.start - 1;
+  // for (let i = 1; i <= this.length; i += 1) {
+  //   endIndex = this.nextIndex(endIndex);
+  // }
+  // return endIndex;
+
+  // 数学方法
+  let targetIndex = this.start + this.length - 1;
+  const maxIndex = this.max - 1;
+  if (targetIndex > maxIndex) {
+    // 注意：索引值超过了容器最大索引，就要回退容器.length次。
+    targetIndex = targetIndex - this.max;
+  }
+  return targetIndex;
+}
+
+LoopQueue.prototype.push = function(value) {
+  if (this.length !== this.max) {
+    this.items[this.nextIndex(this.endIndex())] = value;
+
+    this.length += 1;
+    return this.length;
+  }
+  return false
+}
+
+LoopQueue.prototype.shift = function() {
+  if (this.length) {
+    const value = this.items[this.start];
+    this.items[this.start] = null;
+    this.start = this.nextIndex(this.start);
+
+    this.length -= 1;
+    return value;
+  }
+  return false;
+}
+```
+
