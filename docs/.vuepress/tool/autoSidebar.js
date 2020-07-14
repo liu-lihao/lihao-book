@@ -5,7 +5,7 @@ const utils = require('./utils.js');
 
 // 配置
 // 侧边栏过滤的目录
-const filterFile = ['assets', '.vuepress', '草稿中...'];
+const filterFile = ['assets', '.vuepress', '草稿中'];
 // 分组名称的连接符（文件夹嵌套的情况下文件名的拼接字符串）
 const separator = ' - ';
 
