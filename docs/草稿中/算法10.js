@@ -49,7 +49,7 @@ var isMatch = function(s, p) {
         for(let j = p.length - 1; j >= 0; j -= 1) {
             const equal = isEqual(s, i, p, j);
 
-            if (p[j + 1] === '*' && j < p.length - 1) {
+            if (j < p.length - 1 && p[j + 1] === '*') {
                 dp[i][j] = (equal && dp[i + 1][j]) || dp[i][j + 2];
             } else {
                 dp[i][j] = equal && dp[i + 1][j + 1]
