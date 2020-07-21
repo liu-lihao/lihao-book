@@ -54,6 +54,15 @@ export default async ({
 
 
 function asyncLoadFont() {
+  // 跳过苹果系统
+  var u = navigator.userAgent;
+  var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  if (isiOS) {
+    addAllFont(false);
+    return;
+  }
+
+  addPreLoadStyle();
   const willChange = document.createElement('span');
   willChange.textContent = '你好，,123，？.';
   willChange.style.position = 'fixed';
@@ -61,12 +70,17 @@ function asyncLoadFont() {
   willChange.style.opacity = 0;
   document.body.appendChild(willChange);
   let count = 0;
+  let now = new Date().getTime();
   const robserver = new ResizeObserver( entries => {
     count += 1;
     if (count === 2) {
-      addPingFang();
       robserver.unobserve(willChange);
       willChange.remove();
+      let loadDuration = new Date().getTime() - now;
+      // 多预留5s;
+      setTimeout(() => {
+        addAllFont(true);
+      }, loadDuration > 2000 ? 5000 : 0);
     }
   });
   robserver.observe(willChange);
@@ -76,24 +90,32 @@ function asyncLoadFont() {
   }, 500);
 }
 
-function addPingFang() {
+
+// 预加载
+function addPreLoadStyle() {
   const fontFace = `
-  @font-face {
-    font-family: 'SourceCodePro';
-    src: url('https://liu-lihao.gitee.io/js-ide/style/SourceCodePro-Medium.ttf') format('truetype');
-    src: url('https://liu-lihao.github.io/js-ide/style/SourceCodePro-Medium.ttf') format('truetype');
-  }
   @font-face {
     font-family: 'PingFangZhunJian';
     src: url('https://liu-lihao.gitee.io/js-ide/style/PingFang-Zhun-Jian.ttf') format('truetype');
     src: url('https://liu-lihao.github.io/js-ide/style/PingFang-Zhun-Jian.ttf') format('truetype');
   }`;
   const styleStr = `
+    .will-change-preloading {
+      font-family: 'PingFangZhunJian', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+    }
+  `;
+  const styleDom = document.createElement('style');
+  styleDom.innerHTML = fontFace + styleStr;
+  document.head.append(styleDom);
+}
+
+// 添加全部字体
+function addAllFont(isAddPingFang) {
+  const styleStr = `
   * {
-    font-family: 'SourceCodePro', 'PingFangZhunJian', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+    font-family: 'SourceCodePro'${isAddPingFang ? ", 'PingFangZhunJian'" : ''}, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
   }`;
   const styleDom = document.createElement('style');
   styleDom.innerHTML = styleStr;
-  // styleDom.innerHTML = fontFace + styleStr;
   document.head.append(styleDom);
 }
