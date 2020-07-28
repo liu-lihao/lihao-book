@@ -6,11 +6,11 @@ tagline: 在这里记下我的笔记，方便查阅~
 actionText: 来看看吧~
 actionLink: /JavaScript/1.JS随笔
 features:
-- title: Vue
-  details: 技巧、轮子~
-- title: Webpack
-  details: 打个包~
-- title: Koa
-  details: CURD~
+- title: 前端框架
+  details: Vue、React
+- title: 前端工程
+  details: Webpack
+- title: 算法和数据结构
+  details: LeetCode 刷题中...
 footer: lihao-book
 ---
