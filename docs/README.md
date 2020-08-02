@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /images/home.png
+heroImage: /images/bg.webp
 heroText: lihao-book
 tagline: 在这里记下我的笔记，方便查阅~
 actionText: 来看看吧~
