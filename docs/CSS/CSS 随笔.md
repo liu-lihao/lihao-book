@@ -1,4 +1,4 @@
-# 技巧
+# CSS 随笔
 
 ## 粘性定位：`position: sticky`
 

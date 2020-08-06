@@ -58,6 +58,7 @@ module.exports = {
           { text: 'Nodejs', link: getFirstFilename('Nodejs') },
           { text: 'Koa', link: getFirstFilename('Koa') },
           { text: 'Webpack', link: getFirstFilename('Webpack') },
+          { text: 'CSS', link: getFirstFilename('CSS') },
           { text: '前端', link: getFirstFilename('前端') },
           { text: '数据结构和算法', link: getFirstFilename('数据结构和算法') }
         ]

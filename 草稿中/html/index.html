@@ -1,0 +1,60 @@
+<!-- 双飞翼 -->
+<div id="wrapper">
+    <div id="center-wrap" class="col">
+        <div id="center"> #center </div>
+    </div>
+    <div id="left" class="col">#left</div>
+    <div id="right" class="col">#right</div>
+</div>
+
+<style type="text/css">
+    .col { float: left; }
+    #center-wrap {
+        width: 100%;
+    }           
+    #center {
+        /* 这是圣杯和双飞翼最明显的区别，在 center 内部使用的是 margin ，而圣杯是直接在 wrapper 部分使用 padding */
+        margin: 0 200px;
+    }
+    #left,#right {
+        width: 200px;
+    }   
+    #left{
+        margin-left: -100%;
+    }       
+    #right {
+        margin-left: -200px;
+    }
+</style>
+
+
+<!-- 圣杯 -->
+<section class="wrapper">
+    <section class="col center">center</section>
+    <aside class="col left">left</aside>
+    <aside class="col right">right</aside>
+</section>
+<style type="text/css"> 
+    .wrapper {
+        padding: 0 200px; 
+        overflow: hidden;
+    }
+    .col {
+        float: left;
+    }
+    .center {
+        width: 100%;
+    }
+    .left,.right {
+        width: 200px; 
+        position: relative;
+    }
+    .left{
+        margin-left: -100%;
+        left: -200px;
+    }
+    .right {
+        margin-left: -200px; 
+        right: -200px;
+    }
+</style>
