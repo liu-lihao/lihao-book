@@ -31,7 +31,7 @@ echo "执行命令：commit -m 'deploy_gitee'"
 git commit -m 'deploy_gitee'
 
 # 发布到Gitee
-echo "代码推送的 Gitee 的 gh-pages 分支，用于部署"
+echo "代码推送到 Gitee 的 gh-pages 分支，用于部署"
 git push -f https://gitee.com/liu-lihao/lihao-book.git master:gh-pages
 
 # 返回到上一次的工作目录
