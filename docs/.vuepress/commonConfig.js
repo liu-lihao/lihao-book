@@ -7,7 +7,7 @@ const getFirstFilename = (str) => {
   return `/${str}/` + utils.getDirChildFilenameByIndex(path.join(__dirname, `../${str}`), 0);
 }
 
-module.exports = {
+const config = {
   title: '笔记', // TODO 改个标题~
   description: '在这里记下我的所有笔记，方便查阅', // TODO 给个描述~
   port: 8888,
@@ -105,7 +105,7 @@ module.exports = {
   evergreen: false
 }
 
-
+module.exports = config
 /**
  * docs/.vuepress: 用于存放全局的配置、组件、静态资源等。
  * docs/.vuepress/components: 该目录中的 Vue 组件将会被自动注册为全局组件。
