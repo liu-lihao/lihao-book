@@ -6,29 +6,61 @@ export default async ({
   siteData, // 站点元数据
   isServer // 当前应用配置是处于 服务端渲染 或 客户端
 }) => {
-
-  window.addEventListener('load',function() {
-    let pathname = '';
-    let zooms = [];
-    document.addEventListener('click',function(event){
-      const newPathname = window.location.pathname;
-      const isImg = event.target.nodeName === 'IMG';
-      const container = document.getElementsByClassName('theme-default-content')[0];
-      const isChild = container.contains(event.target);
-      const isOpened = (event.target.className || '').includes('medium-zoom-image--opened');
-      // debugger;
-      if (isImg && isChild && !isOpened) {
-        if (newPathname !== pathname) {
-          zooms.forEach(item => item.detach())
-          pathname = newPathname;
-          let list = document.querySelectorAll('.theme-default-content :not(a) > img');
-          list = [...list].filter(dom => dom !== event.target); 
-          const z1 = mediumZoom(list);
-          const z2 = mediumZoom(event.target)
-          z2.open();
-          zooms = [z1, z2];
-        }
+  const nextTick = window.requestAnimationFrame
+  const appendBeforeChild = (p, c) => {
+    if (p.firstElementChild) {
+      p.insertBefore(c, p.firstElementChild)
+    } else {
+      p.appendChild(c)
+    }
+  }
+  const DARK_THEME_CLASS = 'dark-theme'
+  const changeTheme = () => {
+    const htmlDom = document.querySelector('html')
+    const isDark = htmlDom.className.includes(DARK_THEME_CLASS)
+    if (isDark) {
+      htmlDom.className = htmlDom.className.replace(DARK_THEME_CLASS, '').replace(/\s+/g, ' ').replace(/^\s/, '').replace(/\s$/, '')
+      localStorage.THEME = ''
+    } else {
+      htmlDom.className = htmlDom.className.replace(/\s+/g, ' ') + ' ' + DARK_THEME_CLASS
+      localStorage.THEME = DARK_THEME_CLASS
+    }
+  }
+  const createNavItem = () => {
+    const item = document.createElement('div')
+    item.className = 'nav-item'
+    item.innerHTML = `<i class="theme-icon iconfont iconzhuti"></i>`
+    item.addEventListener('click', changeTheme)
+    return item
+  }
+  const setThemeStyle = () => {
+    const style = `
+      .theme-icon {
+        font-size: 18px;
+        cursor: pointer;
+        user-select: none;
       }
+      .theme-icon:hover {
+        color: var(--themeColor);
+      }
+    `
+    const styleDom = document.createElement('style')
+    styleDom.innerHTML = style
+    document.head.appendChild(styleDom)
+  }
+  const initTheme = () => {
+    if (localStorage.THEME === DARK_THEME_CLASS) {
+      changeTheme()
+    }
+  }
+  initTheme()
+  window.addEventListener('load',function() {
+    nextTick(() => {
+      setThemeStyle()
+      const containers = document.querySelectorAll('nav.nav-links') || [];
+      [...containers ].forEach(p => {
+        appendBeforeChild(p, createNavItem())
+      })
     })
   });
 }

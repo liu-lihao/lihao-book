@@ -1,0 +1,99 @@
+* {
+  word-break: break-all;
+}
+
+.medium-zoom-image {
+  cursor: pointer;
+  &:hover {
+    box-shadow: var(--boxShadow);
+  }
+  &--opened {
+    z-index: 101;  
+  }
+}
+.medium-zoom-overlay {
+  background-color: rgba(0,0,0,0.6) !important;
+  z-index: 100;
+}
+
+details.custom-block.details {
+  background-color: var(--mainColor);
+  padding: 16px 24px;
+  border-radius: 3px;
+  transition: .2s;
+  font-size: 14px;
+  color: #4f7294;
+  summary {
+    user-select: none;
+  }
+  &:hover {
+    color: #6d98c2;
+    background-color: var(--mainColor);
+    box-shadow: var(--boxShadow);
+  }
+}
+
+.content__default strong{
+  color: var(--themeColor);
+}
+
+body {
+  position: relative;
+  background: none;
+  min-height: 100vh;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url(/lihao-book/images/bg.webp);
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-size: 100%;
+    filter: grayscale(20%) opacity(30%) contrast(80%);
+  }
+  .search-box input  {
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 719px) {
+  .sidebar-open .page {
+    filter: blur(10px); 
+  }
+}
+
+::selection {
+  color: var(--mainColor);
+  background-color: var(--themeColor);
+}
+
+::-webkit-scrollbar-thumb:horizontal { /*水平滚动条的样式*/
+    width: 4px;
+    background-color: rgba(204, 204, 204, 0.5);
+    border-radius: 6px;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: rgb(246, 246, 246); /*滚动条的背景颜色*/
+    border-radius: 0; /*滚动条的圆角宽度*/
+}
+::-webkit-scrollbar {
+    width: 10px; /*滚动条的宽度*/
+    height: 8px; /*滚动条的高度*/
+}
+::-webkit-scrollbar-thumb:vertical { /*垂直滚动条的样式*/
+    height: 50px;
+    background-color: rgba(204, 204, 204, 0.5);
+    border-radius: 4px;
+    outline: 2px solid rgba(255,255,255,0.5);
+    outline-offset: -2px;
+    border: 2px solid rgba(255,255,255,0.5);
+}
+::-webkit-scrollbar-thumb:hover { /*滚动条的hover样式*/
+    height: 50px;
+    background-color: rgba(204, 204, 204, 1);
+    border-radius: 4px;
+}

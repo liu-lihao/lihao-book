@@ -92,17 +92,18 @@ const config = {
   },
   // 插件
   plugins: {
-    // '@vuepress/medium-zoom': {
-    //   selector: '.theme-default-content :not(a) > img',
-    //   // medium-zoom options here
-    //   // See: https://github.com/francoischalifour/medium-zoom#options
-    //   options: {
-    //     margin: 16
-    //   }
-    // }
+    '@vuepress/medium-zoom': {
+      selector: '.theme-default-content :not(a) > img',
+      options: {
+        margin: 16
+      }
+    }
   },
   // 为 false 表示：不转为 ES5，不考虑对 IE 的 polyfills
-  evergreen: false
+  evergreen: false,
+  scss: {
+    implementation: require("sass")
+  }
 }
 
 module.exports = config

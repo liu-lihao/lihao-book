@@ -9,7 +9,7 @@ features:
 - title: 前端框架
   details: Vue、React
 - title: 前端工程
-  details: Webpack
+  details: Webpack、Rollup
 - title: 算法和数据结构
   details: LeetCode 刷题中...
 footer: lihao-book
