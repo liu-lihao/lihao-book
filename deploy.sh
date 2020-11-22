@@ -19,7 +19,7 @@ git pull origin dev
 
 # 生成静态文件
 echo '执行命令：vuepress build docs'
-vuepress build docs
+npx vuepress build docs
 
 # 进入生成的文件夹
 echo "执行命令：cd ./docs/.vuepress/dist \n"
