@@ -20,7 +20,7 @@ export default async ({
     const isDark = htmlDom.className.includes(DARK_THEME_CLASS)
     if (isDark) {
       htmlDom.className = htmlDom.className.replace(DARK_THEME_CLASS, '').replace(/\s+/g, ' ').replace(/^\s/, '').replace(/\s$/, '')
-      localStorage.THEME = ''
+      localStorage.THEME = 'default-theme'
     } else {
       htmlDom.className = htmlDom.className.replace(/\s+/g, ' ') + ' ' + DARK_THEME_CLASS
       localStorage.THEME = DARK_THEME_CLASS
@@ -50,6 +50,8 @@ export default async ({
   }
   const initTheme = () => {
     if (localStorage.THEME === DARK_THEME_CLASS) {
+      changeTheme()
+    } else if (!localStorage.THEME && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       changeTheme()
     }
   }
