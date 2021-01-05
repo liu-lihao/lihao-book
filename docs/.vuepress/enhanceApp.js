@@ -4,35 +4,23 @@ export default async ({
   options, // 附加到根实例的一些选项
   router, // 当前应用的路由实例
   siteData, // 站点元数据
-  isServer // 当前应用配置是处于 服务端渲染 或 客户端
+  isServer, // 当前应用配置是处于 服务端渲染 或 客户端
 }) => {
-  const nextTick = window.requestAnimationFrame
+  const nextTick = window.requestAnimationFrame;
   const appendBeforeChild = (p, c) => {
     if (p.firstElementChild) {
-      p.insertBefore(c, p.firstElementChild)
+      p.insertBefore(c, p.firstElementChild);
     } else {
-      p.appendChild(c)
+      p.appendChild(c);
     }
-  }
-  const DARK_THEME_CLASS = 'dark-theme'
-  const changeTheme = () => {
-    const htmlDom = document.querySelector('html')
-    const isDark = htmlDom.className.includes(DARK_THEME_CLASS)
-    if (isDark) {
-      htmlDom.className = htmlDom.className.replace(DARK_THEME_CLASS, '').replace(/\s+/g, ' ').replace(/^\s/, '').replace(/\s$/, '')
-      localStorage.THEME = 'default-theme'
-    } else {
-      htmlDom.className = htmlDom.className.replace(/\s+/g, ' ') + ' ' + DARK_THEME_CLASS
-      localStorage.THEME = DARK_THEME_CLASS
-    }
-  }
+  };
   const createNavItem = () => {
-    const item = document.createElement('div')
-    item.className = 'nav-item'
-    item.innerHTML = `<i class="theme-icon iconfont iconzhuti"></i>`
-    item.addEventListener('click', changeTheme)
-    return item
-  }
+    const item = document.createElement("div");
+    item.className = "nav-item";
+    item.innerHTML = `<i class="theme-icon iconfont iconzhuti"></i>`;
+    item.addEventListener("click", window.$changeTheme);
+    return item;
+  };
   const setThemeStyle = () => {
     const style = `
       .theme-icon {
@@ -43,26 +31,18 @@ export default async ({
       .theme-icon:hover {
         color: var(--themeColor);
       }
-    `
-    const styleDom = document.createElement('style')
-    styleDom.innerHTML = style
-    document.head.appendChild(styleDom)
-  }
-  const initTheme = () => {
-    if (localStorage.THEME === DARK_THEME_CLASS) {
-      changeTheme()
-    } else if (!localStorage.THEME && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      changeTheme()
-    }
-  }
-  initTheme()
-  window.addEventListener('load',function() {
+    `;
+    const styleDom = document.createElement("style");
+    styleDom.innerHTML = style;
+    document.head.appendChild(styleDom);
+  };
+  window.addEventListener("load", function() {
     nextTick(() => {
-      setThemeStyle()
-      const containers = document.querySelectorAll('nav.nav-links') || [];
-      [...containers ].forEach(p => {
-        appendBeforeChild(p, createNavItem())
-      })
-    })
+      setThemeStyle();
+      const containers = document.querySelectorAll("nav.nav-links") || [];
+      [...containers].forEach((p) => {
+        appendBeforeChild(p, createNavItem());
+      });
+    });
   });
-}
+};
