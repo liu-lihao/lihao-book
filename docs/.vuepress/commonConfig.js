@@ -33,6 +33,25 @@ const config = {
     ],
     ["meta", { name: "msapplication-TileColor", content: "#000000" }],
     ["script", { src: "/js/theme.js" }],
+
+    // PWA
+    ["link", { rel: "manifest", href: "/manifest.json" }],
+    ["meta", { name: "theme-color", content: "#d49400" }],
+    ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
+    [
+      "meta",
+      { name: "apple-mobile-web-app-status-bar-style", content: "black" },
+    ],
+    ["link", { rel: "apple-touch-icon", href: "/images/logo.png" }],
+    ["link", { rel: "mask-icon", href: "/images/egg.svg", color: "#d49400" }],
+    [
+      "meta",
+      {
+        name: "msapplication-TileImage",
+        content: "/lihao-book/images/logo.png",
+      },
+    ],
+    ["meta", { name: "msapplication-TileColor", content: "#000000" }],
   ],
   base: "/lihao-book/", // TODO 如果你项目放在域名的根目录，请清空，否则请加上路径~
   // TODO 例如：https://liu-lihao.github.io/lihao-book/index.html
@@ -116,6 +135,13 @@ const config = {
       selector: ".theme-default-content :not(a) > img",
       options: {
         margin: 16,
+      },
+    },
+    "@vuepress/pwa": {
+      serviceWorker: true,
+      updatePopup: {
+        message: "有新笔记啦，快来更新一下~",
+        buttonText: "更新",
       },
     },
   },
