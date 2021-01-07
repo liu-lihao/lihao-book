@@ -1,0 +1,3 @@
+# packages/template-explorer/src/theme.ts
+
+<<< @/docs/Code/vue-next/packages/template-explorer/src/theme.ts

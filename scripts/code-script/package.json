@@ -1,0 +1,9 @@
+{
+  "name": "code-script",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "istextorbinary": "^5.12.0"
+  }
+}

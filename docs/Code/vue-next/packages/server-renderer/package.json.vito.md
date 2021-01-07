@@ -1,0 +1,3 @@
+# packages/server-renderer/package.json
+
+<<< @/docs/Code/vue-next/packages/server-renderer/package.json
