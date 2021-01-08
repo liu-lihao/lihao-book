@@ -1,67 +1,77 @@
+const fs = require("fs-extra");
 const path = require("path");
-const fs = require("fs");
-const utils = require("../../docs/.vuepress/tool/utils");
+const { getCatalog, orderCatalog, writeFile, getOnlyId } = require("./utils");
 const { isBinary } = require("istextorbinary");
+const TITLE_SYMBOL = "#title#";
+const formatMdContent = (str) =>
+  str.replace(/(\\| |_|\[|\]|\*)/g, ($1) => "\\" + $1);
 
-const MD_EXT = ".md";
+const homeTitle = "vue-next";
+const codeDir = path.resolve(__dirname, "./data/vue-next");
+const outDir = path.resolve(__dirname, "./data/md");
+const outHomeFileDir = path.resolve(__dirname, "./data/README.md");
 
-const codeDataDir = path.resolve(__dirname, "./vue-next");
+const filter = ({ path, isFile, base }) => {
+  if (isFile && [".DS_Store"].includes(base)) {
+    return false;
+  }
+  if (!isFile && ["node_modules", ".git"].includes(base)) {
+    return false;
+  }
+  return true;
+};
+
+const createHome = (content) => {
+  content = content.replace(TITLE_SYMBOL, formatMdContent(homeTitle));
+  writeFile(outHomeFileDir, content);
+};
 
 const getMdContent = ({ title, path }) => {
-  return `# ${title}
+  return `# ${formatMdContent(title)}
 
 <<< ${path}
 `;
 };
 
-utils.scanningAllFile(
-  codeDataDir,
-  (isFile, dir) => {
-    if (!isFile) {
-      return;
+const createMd = (item) => {
+  const filename = item.id + ".md";
+  const fileDir = path.resolve(outDir, filename);
+  if (item.ext === ".md") {
+    fs.copyFileSync(item.path, fileDir);
+    return;
+  }
+  const content = getMdContent({
+    title: item.relation,
+    path: `@/docs/#1#/${item.relation}`,
+  });
+  writeFile(fileDir, content);
+};
+
+const run = () => {
+  const catalog = getCatalog(codeDir, { filter });
+  if (!catalog) {
+    console.log("代码目录不存在 codeDir:", codeDir);
+    return;
+  }
+  let homeContent = `# ${TITLE_SYMBOL}\n\n`;
+  orderCatalog(catalog, (item, level) => {
+    item.id = getOnlyId();
+    item.isBinary = isBinary(item.path);
+    item.relation = path.relative(codeDir, item.path);
+    if (!item.isBinary) {
+      createMd(item);
     }
-    if (isBinary(dir)) {
-      return;
+    if (level > 0) {
+      const before = "".padEnd((level - 1) * 2, " ") + "- ";
+      const name =
+        item.isBinary || !item.isFile
+          ? formatMdContent(item.base)
+          : `[${formatMdContent(item.base)}](#2#/${item.id}.html)`;
+      const after = "\n";
+      homeContent += before + name + after;
     }
+  });
+  createHome(homeContent);
+};
 
-    const info = path.parse(dir);
-
-    if (info.base === ".DS_Store") {
-      return;
-    }
-
-    if (info.ext.toLocaleLowerCase() === MD_EXT) {
-      return;
-    }
-
-    // 直接干掉.开头的目录和文件 以及 测试文件
-    if (
-      dir.includes("/.") ||
-      dir.includes("\\.") ||
-      dir.includes("__tests__") ||
-      dir.includes("/tests/") ||
-      dir.includes("\\tests\\") ||
-      dir.includes("/test-dts/") ||
-      dir.includes("\\test-dts\\")
-    ) {
-      return;
-    }
-
-    const newFileName = info.base + ".vito" + MD_EXT;
-
-    const newFilePath = path.resolve(path.dirname(dir), newFileName);
-
-    console.log(dir);
-    console.log(newFilePath);
-    console.log("---");
-
-    fs.writeFileSync(
-      newFilePath,
-      getMdContent({
-        title: path.relative(codeDataDir, dir),
-        path: `@/docs/Code/vue-next/${path.relative(codeDataDir, dir)}`,
-      })
-    );
-  },
-  false
-);
+run();
