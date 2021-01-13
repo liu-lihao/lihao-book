@@ -6,21 +6,21 @@ export default async ({
   siteData, // 站点元数据
   isServer, // 当前应用配置是处于 服务端渲染 或 客户端
 }) => {
-  const nextTick = window.requestAnimationFrame;
+  const nextTick = window.requestAnimationFrame
   const appendBeforeChild = (p, c) => {
     if (p.firstElementChild) {
-      p.insertBefore(c, p.firstElementChild);
+      p.insertBefore(c, p.firstElementChild)
     } else {
-      p.appendChild(c);
+      p.appendChild(c)
     }
-  };
+  }
   const createNavItem = () => {
-    const item = document.createElement("div");
-    item.className = "nav-item";
-    item.innerHTML = `<i class="theme-icon iconfont iconzhuti"></i>`;
-    item.addEventListener("click", window.$changeTheme);
-    return item;
-  };
+    const item = document.createElement('div')
+    item.className = 'nav-item'
+    item.innerHTML = `<i class="theme-icon iconfont iconzhuti"></i>`
+    item.addEventListener('click', window.$changeTheme)
+    return item
+  }
   const setThemeStyle = () => {
     const style = `
       .theme-icon {
@@ -31,18 +31,18 @@ export default async ({
       .theme-icon:hover {
         color: var(--themeColor);
       }
-    `;
-    const styleDom = document.createElement("style");
-    styleDom.innerHTML = style;
-    document.head.appendChild(styleDom);
-  };
-  window.addEventListener("load", function() {
+    `
+    const styleDom = document.createElement('style')
+    styleDom.innerHTML = style
+    document.head.appendChild(styleDom)
+  }
+  window.addEventListener('load', function() {
     nextTick(() => {
-      setThemeStyle();
-      const containers = document.querySelectorAll("nav.nav-links") || [];
-      [...containers].forEach((p) => {
-        appendBeforeChild(p, createNavItem());
-      });
-    });
-  });
-};
+      setThemeStyle()
+      const containers = document.querySelectorAll('nav.nav-links') || []
+      ;[...containers].forEach(p => {
+        appendBeforeChild(p, createNavItem())
+      })
+    })
+  })
+}

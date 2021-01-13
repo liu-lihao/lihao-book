@@ -1,3 +1,0 @@
-# packages/runtime-core/src/vnode.ts
-
-<<< @/docs/Code/vue-next/packages/runtime-core/src/vnode.ts

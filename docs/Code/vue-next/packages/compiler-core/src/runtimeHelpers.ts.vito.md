@@ -1,3 +1,0 @@
-# packages/compiler-core/src/runtimeHelpers.ts
-
-<<< @/docs/Code/vue-next/packages/compiler-core/src/runtimeHelpers.ts

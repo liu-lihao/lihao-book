@@ -1,3 +1,0 @@
-# packages/compiler-sfc/src/templateTransformSrcset.ts
-
-<<< @/docs/Code/vue-next/packages/compiler-sfc/src/templateTransformSrcset.ts
