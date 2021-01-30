@@ -18,7 +18,7 @@ const codeDir = path.resolve(__dirname, './data/vue-next')
 const outDir = path.resolve(__dirname, './data/md')
 // 脚本 - 首页输出位置
 const outHomeFileDir = path.resolve(__dirname, './data/README.md')
-// md - 内容 - 引用代码的代码文件目录
+// md - 内容 - 引用代码的代码文件目录，只能用 @/docs/ 开头
 const codeFileDir = '@/docs/Code/vue-next/vue-next'
 // md - 首页 - 跳转目目录
 const mdFileDir = '/Code/vue-next/md'
