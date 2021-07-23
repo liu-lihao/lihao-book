@@ -55,5 +55,4 @@ module.exports = {
       children: ['thanks/'],
     },
   ],
-  '/Code/': [['vue-next/', 'vue-next']],
 }

@@ -5,7 +5,7 @@ const utils = require('./utils.js')
 
 // 配置
 // 侧边栏过滤的目录
-const filterFile = ['assets', '.vuepress', 'Code']
+const filterFile = ['assets', '.vuepress']
 // 分组名称的连接符（文件夹嵌套的情况下文件名的拼接字符串）
 const separator = ' / '
 
@@ -97,9 +97,7 @@ Object.keys(tempRes).forEach(resKey => {
   })
   strArr = strArr.sort(natsort())
   const sorter = natsort()
-  objArr = objArr.sort((a, b) => {
-    return sorter(a.title, b.title)
-  })
+  objArr = objArr.sort((a, b) => sorter(a.title, b.title))
   res[resKey] = [...strArr, ...objArr]
 })
 

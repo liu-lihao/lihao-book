@@ -1,3 +1,0 @@
-# packages/runtime-core/\_\_tests\_\_/helpers/resolveAssets.spec.ts
-
-<<< @/docs/Code/vue-next/vue-next/packages/runtime-core/__tests__/helpers/resolveAssets.spec.ts
