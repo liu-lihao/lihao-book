@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "笔记",
   "scripts": {
-    "dev": "npx vuepress dev docs",
-    "start": "npx vuepress dev docs",
-    "build": "bash deploy.sh"
+    "dev": "vuepress dev docs",
+    "start": "vuepress dev docs",
+    "build-github": "vuepress build docs",
+    "build-gitee": "vuepress build docs",
+    "build-deploy": "yarn build-github && bash deploy_github.sh && yarn build-gitee && bash deploy_gitee.sh"
   },
   "author": "liu-lihao",
   "devDependencies": {
