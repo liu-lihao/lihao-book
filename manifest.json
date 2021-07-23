@@ -1,0 +1,15 @@
+{
+  "name": "lihao-book",
+  "short_name": "记录笔记",
+  "start_url": "/lihao-book/index.html",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#d49400",
+  "icons": [
+    {
+      "src": "/lihao-book/images/logo.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    }
+  ]
+}
