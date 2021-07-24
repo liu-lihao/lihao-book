@@ -86,10 +86,10 @@ jobs:
         source-repo: git@github.com:liu-lihao/lihao-book.git
         destination-repo: git@gitee.com:liu-lihao/lihao-book.git
 
-    # - name: 🎯 Build Gitee Pages
-    #   uses: yanglbme/gitee-pages-action@v1.2.8
-    #   with:
-    #     gitee-username: liu-lihao
-    #     gitee-password: ${{ secrets.GITEE_PASSWORD }}
-    #     gitee-repo: liu-lihao/lihao-book
-    #     branch: gitee-pages
+    - name: 🎯 Build Gitee Pages
+      uses: yanglbme/gitee-pages-action@v1.2.8
+      with:
+        gitee-username: liu-lihao
+        gitee-password: ${{ secrets.GITEE_PASSWORD }}
+        gitee-repo: liu-lihao/lihao-book
+        branch: gitee-pages
