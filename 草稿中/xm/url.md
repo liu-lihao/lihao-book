@@ -7,8 +7,8 @@
 - 客户端发送请求数据包
 - 服务端接收并处理后，返回 `200` 状态码及 `index.html`
 - 客户端接收 `index.html`，交给新的渲染进程
-- 由主线程解析 `html`，从 `DOM tree` + `Style Tree` => `Layout Tree` => `Paint` => `Layer`
-- 再由合成线程、栅格线程通过 GUP 渲染到页面上
+- 由GUI线程、JS引擎线程串行解析 `html`，从 `DOM tree` + `Style Tree` => `Layout Tree` => `Paint` => `Layer`
+- 再由合成线程、栅格线程通过 GPU 渲染到页面上
 
 
 ## 备注
