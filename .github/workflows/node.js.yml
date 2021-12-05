@@ -5,13 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ dev ]
+    branches: [dev]
   pull_request:
-    branches: [ dev ]
+    branches: [dev]
 
 jobs:
   build-github:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,32 +19,31 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: 👇 Checkout
-      uses: actions/checkout@v2
+      - name: 👇 Checkout
+        uses: actions/checkout@v2
 
-    - name: 💪🏼 Nodejs ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: 💪🏼 Nodejs ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-    - name: 📥 Installing
-      run: |
-        npm i yarn -g
-        yarn
+      - name: 📥 Installing
+        run: |
+          npm i yarn -g
+          yarn
 
-    - name: 🧿 Building
-      run: yarn build-github
+      - name: 🧿 Building
+        run: yarn build-github
 
-    - name: 🚀 Deploy gh-pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
-      with:
-        branch: gh-pages
-        folder: docs/.vuepress/dist
-        token: ${{ secrets.VITO_GITHUB_TOKEN }}
+      - name: 🚀 Deploy gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          token: ${{ secrets.VITO_GITHUB_TOKEN }}
 
   build-gitee:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -54,42 +52,42 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: 👇 Checkout
-      uses: actions/checkout@v2
+      - name: 👇 Checkout
+        uses: actions/checkout@v2
 
-    - name: 💪🏼 Nodejs ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: 💪🏼 Nodejs ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-    - name: 📥 Installing
-      run: |
-        npm i yarn -g
-        yarn
+      - name: 📥 Installing
+        run: |
+          npm i yarn -g
+          yarn
 
-    - name: 🧿 Building
-      run: yarn build-gitee
+      - name: 🧿 Building
+        run: yarn build-gitee
 
-    - name: 🚀 Deploy gitee-pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
-      with:
-        branch: gitee-pages
-        folder: docs/.vuepress/dist
-        token: ${{ secrets.VITO_GITHUB_TOKEN }}
+      - name: 🚀 Deploy gitee-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gitee-pages
+          folder: docs/.vuepress/dist
+          token: ${{ secrets.VITO_GITHUB_TOKEN }}
 
-    - name: 💠 Sync to Gitee
-      uses: wearerequired/git-mirror-action@v1.0.1
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.GITEE_SSHKEY_QQ_MAIL }}
-      with:
-        source-repo: git@github.com:liu-lihao/lihao-book.git
-        destination-repo: git@gitee.com:liu-lihao/lihao-book.git
+      - name: 💠 Sync to Gitee
+        uses: wearerequired/git-mirror-action@v1.0.1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_SSHKEY_QQ_MAIL }}
+        with:
+          source-repo: git@github.com:liu-lihao/lihao-book.git
+          destination-repo: git@gitee.com:liu-lihao/lihao-book.git
 
-    - name: 🎯 Build Gitee Pages
-      uses: yanglbme/gitee-pages-action@v1.2.8
-      with:
-        gitee-username: liu-lihao
-        gitee-password: ${{ secrets.GITEE_PASSWORD }}
-        gitee-repo: liu-lihao/lihao-book
-        branch: gitee-pages
+      - name: 🎯 Build Gitee Pages
+        uses: yanglbme/gitee-pages-action@v1.3.9
+        with:
+          gitee-username: liu-lihao
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          gitee-repo: liu-lihao/lihao-book
+          branch: gitee-pages
